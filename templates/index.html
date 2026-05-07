@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Video Summarizer</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#f2f2f2;
+            text-align:center;
+            padding:40px;
+        }
+
+        input{
+            width:60%;
+            padding:12px;
+            font-size:16px;
+        }
+
+        button{
+            padding:12px 25px;
+            background:red;
+            color:white;
+            border:none;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        .summary{
+            background:white;
+            width:70%;
+            margin:auto;
+            margin-top:20px;
+            padding:20px;
+            border-radius:10px;
+            text-align:left;
+        }
+
+        .error{
+            color:red;
+            margin-top:20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎥 YouTube Video Summarizer</h1>
+
+    <form method="POST">
+        <input type="text" name="url" placeholder="Enter YouTube URL" required>
+        <button type="submit">Summarize</button>
+    </form>
+
+    {% if summary %}
+    <div class="summary">
+        <h2>Summary:</h2>
+        <p>{{ summary }}</p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="error">
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+</body>
+</html>
