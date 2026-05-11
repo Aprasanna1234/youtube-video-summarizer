@@ -1,69 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Video Summarizer</title>
 
     <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
         body{
-            font-family: Arial;
-            background:#f2f2f2;
-            text-align:center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:20px;
+        }
+
+        .container{
+            background:white;
+            width:80%;
+            max-width:800px;
             padding:40px;
+            border-radius:15px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        h1{
+            color:#ff0000;
+            margin-bottom:25px;
+        }
+
+        form{
+            display:flex;
+            gap:10px;
+            justify-content:center;
+            flex-wrap:wrap;
         }
 
         input{
-            width:60%;
-            padding:12px;
+            width:70%;
+            padding:14px;
+            border:1px solid #ccc;
+            border-radius:8px;
             font-size:16px;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#ff0000;
         }
 
         button{
-            padding:12px 25px;
-            background:red;
+            padding:14px 28px;
+            background:#ff0000;
             color:white;
             border:none;
+            border-radius:8px;
             cursor:pointer;
             font-size:16px;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#cc0000;
+            transform:scale(1.03);
         }
 
         .summary{
-            background:white;
-            width:70%;
-            margin:auto;
-            margin-top:20px;
-            padding:20px;
+            margin-top:30px;
+            background:#f8f9fa;
+            padding:25px;
+            border-left:6px solid #ff0000;
             border-radius:10px;
             text-align:left;
+            line-height:1.8;
+            animation:fadeIn 0.5s ease-in-out;
+        }
+
+        .summary h2{
+            color:#333;
+            margin-bottom:15px;
         }
 
         .error{
-            color:red;
-            margin-top:20px;
+            margin-top:25px;
+            background:#ffe5e5;
+            color:#d8000c;
+            padding:15px;
+            border-radius:8px;
+            font-weight:bold;
+        }
+
+        @keyframes fadeIn {
+            from{
+                opacity:0;
+                transform:translateY(10px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        @media(max-width:768px){
+            input{
+                width:100%;
+            }
+
+            button{
+                width:100%;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>🎥 YouTube Video Summarizer</h1>
+    <div class="container">
 
-    <form method="POST">
-        <input type="text" name="url" placeholder="Enter YouTube URL" required>
-        <button type="submit">Summarize</button>
-    </form>
+        <h1>🎥 YouTube Video Summarizer</h1>
 
-    {% if summary %}
-    <div class="summary">
-        <h2>Summary:</h2>
-        <p>{{ summary }}</p>
+        <form method="POST">
+            <input type="text" name="url" placeholder="Paste YouTube URL here..." required>
+            <button type="submit">Summarize</button>
+        </form>
+
+        {% if summary %}
+        <div class="summary">
+            <h2>📄 Video Summary</h2>
+            <p>{{ summary }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+
     </div>
-    {% endif %}
-
-    {% if error %}
-    <div class="error">
-        <p>{{ error }}</p>
-    </div>
-    {% endif %}
 
 </body>
 </html>
